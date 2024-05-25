@@ -1,0 +1,118 @@
+#resultado {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+
+      /* Formatação para todas as tabelas */
+      table {
+        border-collapse: collapse;
+        width: 700px;
+        text-align: center;
+      }
+      th,
+      td {
+        border: 2px solid black;
+        text-align: center;
+        padding: 8px;
+      }
+      th {
+        background-color: #f2f2f2;
+        font-weight: bold;
+      }
+
+      /*Formatação para itens em destaque*/
+      .destaque {
+        color: red;
+        font-weight: bold;
+      }
+
+      /* Formatação específica para a primeira coluna da tabela com id "tabela1" */
+      #tabela1 td:first-child {
+        font-weight: bold;
+      }
+
+      #titulo {
+        display: flex;
+        justify-content: center;
+      }
+
+      /* Estilo para o formulário */
+      form {
+        max-width: 580px;
+        margin: 0 auto;
+        font-family: Arial, sans-serif;
+      }
+
+      /* Estilo para os campos de entrada */
+      input[type="text"],
+      textarea {
+        width: 100%;
+        padding: 10px;
+        margin-bottom: 10px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        font-size: 16px;
+      }
+
+      /* Estilo para o elemento de entrada de número */
+      input[type="number"] {
+        width: 100%;
+        padding: 10px;
+        margin-bottom: 10px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        font-size: 16px;
+      }
+
+      /* Estilo para o botão */
+      button {
+        background-color: #007bff;
+        color: #fff;
+        border: none;
+        padding: 10px 20px;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 16px;
+      }
+
+      /* Estilo para o botão de adicionar itens */
+      #adicionarItens {
+        background-color: #28a745;
+      }
+
+      /* Estilo para o botão de enviar */
+      #enviar {
+        background-color: #dc3545;
+        color: #fff;
+        border: none;
+        padding: 10px 20px;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 16px;
+      }
+
+      #botaoCopiar {
+        position: fixed;
+        bottom: 2%;
+        right: 2%;
+      }
+
+      .escondido {
+        position: fixed;
+        right: -10%;
+      }
+
+/* Estilo para o elemento de seleção do Select2 */
+.select2-selection--single {
+        width: 600px;
+        margin-bottom: 10px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        font-size: 16px;
+      }
+
+      select {
+        width: 600px;
+        padding: 10px;
+      }
