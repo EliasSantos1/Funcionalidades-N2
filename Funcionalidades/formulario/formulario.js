@@ -8,7 +8,6 @@ const BotaoEnviar = document.getElementById("enviar");
 
 
 lerDados().then((dados => {
-    console.log(dados);
     if (dados != null) {
 
 	var ListaDeItens = dados.ItensTI
