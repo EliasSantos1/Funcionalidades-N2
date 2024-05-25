@@ -2,7 +2,7 @@
 
 ## Descrição do Projeto
 
-Este projeto foi desenvolvido para a matéria de Projeto Integrado: Desenvolvimento de Sistemas. O objetivo é criar um sistema com funções úteis para a equipe do Service Desk N2, onde atuo como estagiário. O sistema foi projetado para melhorar a eficiência e a organização das atividades do Service Desk, proporcionando ferramentas e funcionalidades que facilitam a resolução de problemas e o atendimento aos usuários.
+Este projeto foi desenvolvido para a matéria de Projeto Integrador: Desenvolvimento de Sistemas. O objetivo é criar um sistema com funções úteis para a equipe do Service Desk N2, onde atuo como estagiário. O sistema foi projetado para melhorar a eficiência e a organização das atividades do Service Desk, proporcionando ferramentas e funcionalidades que facilitam a resolução de problemas e o atendimento aos usuários.
 
 ## Funcionalidades
 
