@@ -9,7 +9,6 @@ const divItens = document.getElementById("itens");
 const divResultado = document.getElementById("resultado");
 
 lerDados().then((dados => {
-  console.log(dados);
   if (dados != null) {
 
 
