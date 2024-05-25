@@ -2,7 +2,6 @@ import { criarBlocoAguardando, criarBlocoRecebido, criarBlocoSolicitacao } from 
 import { lerDados, adicionarDadosSolicitar, excluirDadosSolicitar } from "../funcoesUteis/firebase.js";
 
 lerDados().then((dados => {
-    console.log(dados);
     if (dados != null) {
     var dadosSolictacao = dados.ItensParaSolicitar
     var dadosAguardando = dados.ItensAguardandoChegada
