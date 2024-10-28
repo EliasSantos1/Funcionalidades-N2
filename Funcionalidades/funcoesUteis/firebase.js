@@ -3,6 +3,7 @@ import {
   getDatabase,
   ref,
   set,
+  push,
   onValue,
   remove
 } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-database.js";
@@ -157,5 +158,23 @@ export function excluirDadosAguardando(ID_Dados) {
       });
   } catch (error) {
     console.error("Erro ao excluir dados:", error);
+  }
+}
+
+export function adicionarAoHistorico(dadosParaAdicionar, ID_Dados) {
+  try {
+    // Referência para o local onde você deseja adicionar os dados
+    const dadosRef = ref(db, `Historico/${ID_Dados}`);
+
+    // Adicione os dados ao banco de dados
+    push(dadosRef, dadosParaAdicionar)
+      .then(() => {
+        console.log("Dados adicionados com sucesso!");
+      })
+      .catch((error) => {
+        console.error("Erro ao adicionar dados:", error);
+      });
+  } catch (error) {
+    console.error("Erro ao adicionar dados:", error);
   }
 }

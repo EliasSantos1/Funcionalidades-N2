@@ -1,4 +1,4 @@
-import { adicionarDadosSolicitar, lerDados } from "../funcoesUteis/firebase.js";
+import { adicionarDadosSolicitar, lerDados, adicionarAoHistorico } from "../funcoesUteis/firebase.js";
 
 //Variaveis
 var QuantidadeDeItensDiferentes = 1;
@@ -43,6 +43,12 @@ BotaoEnviar.addEventListener("click", function EnviaFormulario(event) {
 			itens,
 			quantidadesItens
 		);
+
+		const agora = new Date();
+		const minutosFormatados = agora.getMinutes().toString().padStart(2, '0');
+		const dataFormatada = `${agora.getDate()}/${agora.getMonth() + 1}/${agora.getFullYear()} - ${agora.getHours()}:${minutosFormatados}`;
+		adicionarAoHistorico(`${dataFormatada} | Feito o pedido do chamado ${objFormulario.CHAMADO}`, objFormulario.CHAMADO)
+
 		adicionarDadosSolicitar(objFormulario, objFormulario.CHAMADO)
 		alert("Pedido enviado!")
 	} else {
