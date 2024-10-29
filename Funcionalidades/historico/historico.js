@@ -1,4 +1,8 @@
 import { lerDados } from "../funcoesUteis/firebase.js";
+import { verificarLogin } from '../funcoesUteis/auth.js';
+
+// Verifica se o usuário está logado ao carregar a página
+verificarLogin();
 
 lerDados().then((dados) => {
 	if (dados != null) {

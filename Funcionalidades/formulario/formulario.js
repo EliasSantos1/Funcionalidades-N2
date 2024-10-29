@@ -1,4 +1,8 @@
 import { adicionarDadosSolicitar, lerDados, adicionarAoHistorico } from "../funcoesUteis/firebase.js";
+import { verificarLogin } from '../funcoesUteis/auth.js';
+
+// Verifica se o usuário está logado ao carregar a página
+verificarLogin();
 
 //Variaveis
 var QuantidadeDeItensDiferentes = 1;

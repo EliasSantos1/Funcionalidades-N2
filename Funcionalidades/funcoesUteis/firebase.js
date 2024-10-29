@@ -178,3 +178,48 @@ export function adicionarAoHistorico(dadosParaAdicionar, ID_Dados) {
     console.error("Erro ao adicionar dados:", error);
   }
 }
+
+// Função para autenticar o usuário
+export function autenticarUsuario(matricula, password) {
+  return new Promise((resolve, reject) => {
+      const usuariosRef = ref(db, 'Usuarios'); // Referência ao nó "Usuarios"
+
+      onValue(usuariosRef, (snapshot) => {
+          const dados = snapshot.val();
+          if (dados) {
+              // Aqui, estamos usando Object.values para obter todos os usuários
+              const usuarios = Object.values(dados); // Converte os dados em um array
+
+              // Verifica se há um usuário correspondente
+              const usuarioEncontrado = usuarios.find(usuario => 
+                  usuario.matricula === matricula && usuario.password === password
+              );
+
+              if (usuarioEncontrado) {
+                  resolve(usuarioEncontrado); // Retorna o usuário autenticado
+              } else {
+                  resolve(null); // Retorna null se não encontrar
+              }
+          } else {
+              resolve(null); // Retorna null se não houver dados
+          }
+      }, (error) => {
+          reject(error); // Rejeita a Promise em caso de erro
+      });
+  });
+}
+
+export function adicionarUsuario(dadosUsuario) {
+  return new Promise((resolve, reject) => {
+    const usuariosRef = ref(db, 'Usuarios/' + dadosUsuario.matricula); // Usando a matrícula como chave
+    set(usuariosRef, dadosUsuario)
+      .then(() => {
+        console.log("Usuário adicionado com sucesso!");
+        resolve(); // Resolve a Promise
+      })
+      .catch((error) => {
+        console.error("Erro ao adicionar usuário:", error);
+        reject(error); // Rejeita a Promise em caso de erro
+      });
+  });
+}

@@ -1,5 +1,9 @@
 import { criarBlocoAguardando, criarBlocoRecebido, criarBlocoSolicitacao } from "./blocos.js";
 import { lerDados, adicionarDadosSolicitar, excluirDadosSolicitar } from "../funcoesUteis/firebase.js";
+import { verificarLogin } from '../funcoesUteis/auth.js';
+
+// Verifica se o usuário está logado ao carregar a página
+verificarLogin();
 
 lerDados().then((dados => {
     if (dados != null) {

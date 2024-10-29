@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Página de Login</title>
+    <link rel="stylesheet" href="login.css"> <!-- Seu CSS -->
+</head>
+<body>
+    <header>
+        <h1>Acesso ao Sistema</h1>
+    </header>
+    <main>
+        <div id="acao">
+            <h2>O que você gostaria de fazer?</h2>
+            <button id="btn-login" class="botao">Entrar</button>
+            <button id="btn-register" class="botao">Criar Conta</button>
+        </div>
+
+        <form id="login-form" style="display: none;">
+            <h2>Login</h2>
+            <div class="input-group">
+                <label for="matricula">Matrícula</label>
+                <input type="text" id="matricula" name="matricula" required>
+            </div>
+            <div class="input-group">
+                <label for="password">Senha</label>
+                <input type="password" id="password" name="password" required>
+            </div>
+            <button type="submit" class="botao">Entrar</button>
+            <div id="feedback"></div> <!-- Mensagem de feedback aqui -->
+        </form>
+
+        <form id="register-form" style="display: none;">
+            <h2>Criar Conta</h2>
+            <div class="input-group">
+                <label for="nome">Nome Completo</label>
+                <input type="text" id="nome" name="nome" required>
+            </div>
+            <div class="input-group">
+                <label for="email">E-mail</label>
+                <input type="email" id="email" name="email" required>
+            </div>
+            <div class="input-group">
+                <label for="matricula-register">Matrícula</label>
+                <input type="text" id="matricula-register" name="matricula" required>
+            </div>
+            <div class="input-group">
+                <label for="password-register">Senha</label>
+                <input type="password" id="password-register" name="password" required>
+            </div>
+            <button type="submit" class="botao">Registrar</button>
+            <div id="register-feedback"></div> <!-- Mensagem de feedback do registro aqui -->
+        </form>
+    </main>
+    <script src="login.js" type="module"></script> <!-- Importando o JS aqui -->
+</body>
+</html>
