@@ -5,7 +5,8 @@ import {
   set,
   push,
   onValue,
-  remove
+  remove,
+  update
 } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-database.js";
 
 // Your web app's Firebase configuration
@@ -221,5 +222,43 @@ export function adicionarUsuario(dadosUsuario) {
         console.error("Erro ao adicionar usuário:", error);
         reject(error); // Rejeita a Promise em caso de erro
       });
+  });
+}
+
+export function atualizarEstoque(item, novaQuantidade) {
+  try {
+    // Referência para o local onde você deseja adicionar os dados
+    const dadosRef = ref(db, `Estoque`);
+
+    const atualizacao = {};
+    atualizacao[item] = novaQuantidade; // Define o valor do item com a nova quantidade
+
+    // Adicione os dados ao banco de dados
+    update(dadosRef, atualizacao)
+      .then(() => {
+        console.log(`Estoque do item "${item}" atualizado para ${novaQuantidade}.`);
+      })
+      .catch((error) => {
+        console.error("Erro ao atualizar o estoque:", error);
+      });
+  } catch (error) {
+    console.error("Erro ao atualizar o estoque:", error);
+  }
+}
+
+/**
+ * Adiciona um listener para atualizações em tempo real no nó `Estoque`.
+ * @param {Function} callback - Função a ser chamada quando os dados mudarem.
+ */
+export function adicionarListenerEstoque(callback) {
+  const estoqueRef = ref(db, "Estoque");
+
+  onValue(estoqueRef, (snapshot) => {
+      const dadosAtualizados = snapshot.val();
+      if (dadosAtualizados) {
+          callback(dadosAtualizados); // Executa a função passada com os dados atualizados
+      } else {
+          console.error("Nenhum dado encontrado no estoque.");
+      }
   });
 }

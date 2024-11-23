@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Controle de Estoque</title>
+    <link rel="stylesheet" href="estoque.css">
+</head>
+<body>
+    <header>
+        <span id="botaoVoltar" onclick="window.history.back();">←</span>
+        <h1>Controle de Estoque</h1>
+    </header>
+    <div id="containers_geral">
+        <div class="container">
+            <div class="part">
+                <h3>Itens em Estoque</h3>
+
+                <!-- Linha de Títulos das Colunas -->
+                <div class="estoque-header">
+                    <div class="descricao-header">Descrição</div>
+                    <div class="actions-header">
+                        <div class="quantidade-header">Estoque</div>
+                        <div class="botao-header">Retirar</div>
+                        <div class="botao-header">Adicionar</div>
+                    </div>
+                </div>
+
+                <!-- Itens do Estoque -->
+                <div id="itensEstoque" class="script">
+                    <!-- Os itens serão gerados dinamicamente via JS -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modais para Adicionar e Retirar -->
+    <div id="modalRetirar" class="modal">
+        <div class="modal-content">
+            <span class="close" id="closeModalRetirar">&times;</span>
+            <h2>Retirar do Estoque</h2>
+            <label for="chamadoRetirada">Chamado:</label>
+            <input type="text" id="chamadoRetirada"><br>
+            <label for="motivoRetirada">Motivo:</label>
+            <input type="text" id="motivoRetirada"><br>
+            <label for="quantidadeRetirada">Quantidade:</label>
+            <input type="number" id="quantidadeRetirada" min="1"><br>
+            <button class="modal-button" id="btnRetirarEstoque">Enviar</button>
+        </div>
+    </div>
+
+    <div id="modalAdicionar" class="modal">
+        <div class="modal-content">
+            <span class="close" id="closeModalAdicionar">&times;</span>
+            <h2>Adicionar ao Estoque</h2>
+            <label for="motivoAdicao">Motivo:</label>
+            <input type="text" id="motivoAdicao"><br>
+            <label for="quantidadeAdicionada">Quantidade:</label>
+            <input type="number" id="quantidadeAdicionada" min="1"><br>
+            <button class="modal-button" id="btnAdicionarEstoque">Enviar</button>
+        </div>
+    </div>
+
+    <!-- O script deve ser carregado no final do corpo -->
+    <script type="module" src="estoque.js"></script>
+</body>
+</html>

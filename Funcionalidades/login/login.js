@@ -85,5 +85,6 @@ document.addEventListener("DOMContentLoaded", function() {
           registerFeedback.textContent = "Erro ao cadastrar. Tente novamente.";
           registerFeedback.style.color = "red";
         });
+        location.reload();
     });
   });

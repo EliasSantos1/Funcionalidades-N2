@@ -1,4 +1,6 @@
-import { verificarLogin } from './Funcionalidades/funcoesUteis/auth.js';
+const usuarioLogado = sessionStorage.getItem("usuarioLogado");
 
-// Verifica se o usuário está logado ao carregar a página
-verificarLogin();
+    if (!usuarioLogado) {
+        // Se não estiver logado, redireciona para a página de login
+        window.location.href = "Funcionalidades/login/login.html";
+    }

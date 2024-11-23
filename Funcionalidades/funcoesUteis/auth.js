@@ -4,6 +4,6 @@ export function verificarLogin() {
 
     if (!usuarioLogado) {
         // Se não estiver logado, redireciona para a página de login
-        window.location.href = "../../../../Funcionalidades/login/login.html";
+        window.location.href = "../../Funcionalidades/login/login.html";
     }
 }
