@@ -71,3 +71,30 @@ lerDados().then((dados) => {
 		renderizarHistorico(ListaHistorico);
 	}
 });
+
+// Função para exportar os dados para Excel
+function exportarParaExcel() {
+    const historicoContainer = document.getElementById("historico");
+    const pedidos = historicoContainer.querySelectorAll(".pedido");
+
+    // Dados para exportação
+    const dadosExportar = [["Descrição"]]; // Cabeçalho
+
+    // Itera pelos pedidos no histórico
+    pedidos.forEach((pedido) => {
+        const descricao = pedido.querySelector(".descricao").innerText;
+        dadosExportar.push([descricao]);
+    });
+
+    // Cria a planilha
+    const ws = XLSX.utils.aoa_to_sheet(dadosExportar);
+    const wb = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(wb, ws, "Histórico de Pedidos");
+
+    // Baixa o arquivo
+    XLSX.writeFile(wb, "HistoricoPedidos.xlsx");
+}
+
+// Adiciona evento ao botão de exportação
+const botaoExportar = document.getElementById("botaoExportar");
+botaoExportar.addEventListener("click", exportarParaExcel);
