@@ -2,25 +2,46 @@
 
 ## Descrição do Projeto
 
-Este projeto foi desenvolvido para a matéria de Projeto Integrador: Desenvolvimento de Sistemas. O objetivo é criar um sistema com funções úteis para a equipe do Service Desk N2, onde atuo como estagiário. O sistema foi projetado para melhorar a eficiência e a organização das atividades do Service Desk, proporcionando ferramentas e funcionalidades que facilitam a resolução de problemas e o atendimento aos usuários.
+Este projeto foi inicialmente desenvolvido para a matéria de Projeto Integrador: Desenvolvimento de Sistemas. Agora, foi aprimorado e expandido como parte do Trabalho de Conclusão de Curso (TCC) de Engenharia da Computação. O objetivo é criar um sistema eficiente e organizado para a equipe do Service Desk N2, onde atuo como estagiário. O sistema oferece diversas funcionalidades para facilitar o gerenciamento de pedidos, controle de estoque e acompanhamento das atividades do setor.
 
 ## Funcionalidades
 
 1. **Geração de Corpo de E-mail**:
-   - Gera o corpo de um e-mail com formatação específica, incluindo tabelas e somas de valores automaticamente.
-   - Possui um botão para copiar o corpo do e-mail mantendo a formatação.
-   - Os dados, como setores, itens, valores e códigos dos itens, são obtidos a partir de um banco de dados.
-   - Garante um padrão em todos os e-mails de aprovações de compras enviados pelos analistas N2.
+   - Cria automaticamente o corpo de um e-mail com formatação específica, incluindo tabelas e somas de valores.
+   - Botão para copiar o conteúdo mantendo a formatação.
+   - Os dados são obtidos diretamente de um banco de dados.
+   - Garante um padrão em todos os e-mails de aprovação de compras enviados pelos analistas N2.
 
 2. **Formulário de Pedido de Item**:
-   - Formulário onde os analistas N2 podem fazer o pedido de itens.
-   - Conectado ao banco de dados para obter informações como setor, item, valor e código.
-   - Após preencher todas as informações e clicar em enviar, os dados são salvos no banco de dados.
+   - Formulário interativo onde os analistas N2 podem solicitar itens.
+   - Conexão com o banco de dados para preencher informações como setor, item, valor e código.
+   - Os dados enviados são salvos automaticamente no banco de dados para consulta e acompanhamento.
 
 3. **Gerenciamento de Itens**:
-   - Sistema para gerenciar os itens que precisam ser pedidos, os que estão aguardando chegada e os que já chegaram.
-   - Conecta-se ao banco de dados para obter os pedidos realizados pelo sistema de formulário de pedidos.
-   - Permite acompanhar o status dos itens de forma eficiente.
+   - Sistema para acompanhar os itens solicitados, em trânsito e recebidos.
+   - Conexão com o banco de dados para obter informações em tempo real.
+   - Permite gerenciar o status dos itens de forma eficiente.
+
+4. **Sistema de Login**:
+   - Permite identificar os usuários que realizam pedidos ou alterações no sistema.
+   - Os dados de login são armazenados de forma segura no banco de dados.
+
+5. **Histórico de Alterações nos Pedidos**:
+   - Registra todas as alterações feitas nos pedidos, como solicitações, exclusões e atualizações.
+   - Histórico ordenado cronologicamente para facilitar a consulta.
+
+6. **Sistema de Estoque**:
+   - Controle detalhado de itens em estoque, com a possibilidade de adicionar ou retirar itens.
+   - Interface intuitiva com botões para gerenciar a quantidade de cada item.
+   - Solicitação de justificativa para cada movimentação no estoque.
+
+7. **Histórico do Estoque**:
+   - Registro completo das movimentações do estoque, incluindo motivos e detalhes das alterações.
+   - Histórico ordenado cronologicamente para auditoria e análise.
+
+8. **Exportação de Dados para Excel**:
+   - Permite exportar os dados de pedidos e do estoque para arquivos Excel.
+   - Facilita a análise e o compartilhamento das informações.
 
 ## Tecnologias Utilizadas
 
@@ -32,18 +53,18 @@ Este projeto foi desenvolvido para a matéria de Projeto Integrador: Desenvolvim
 
 Para executar o projeto corretamente, é necessário hospedá-lo em um servidor local devido às políticas de segurança do navegador que impedem a execução de determinadas funcionalidades de JavaScript ao abrir o arquivo diretamente no navegador.
 
-Você pode seguir os seguintes passos para configurar um servidor local:
+### Passos para Configuração
 
-1. **Instale um servidor local**: Se você não tiver um servidor local instalado, pode utilizar ferramentas como o [Live Server](https://marketplace.visualstudio.com/items?itemName=ritwickdey.LiveServer) para o Visual Studio Code ou o [http-server](https://www.npmjs.com/package/http-server) via npm.
+1. **Instale um servidor local**: Caso não tenha um servidor local instalado, utilize ferramentas como o [Live Server](https://marketplace.visualstudio.com/items?itemName=ritwickdey.LiveServer) para o Visual Studio Code ou o [http-server](https://www.npmjs.com/package/http-server) via npm.
 
 2. **Clone o repositório**:
     ```bash
-    git clone https://github.com/EliasSantos1/Projeto-Desenvolvimento-de-sistemas.git
+    git clone https://github.com/EliasSantos1/TCC-Engenharia-da-computacao.git
     ```
 
 3. **Navegue até o diretório do projeto**:
     ```bash
-    cd seu-projeto
+    cd TCC-Engenharia-da-computacao
     ```
 
 4. **Inicie o servidor local**:
@@ -62,4 +83,4 @@ Dessa forma, você poderá testar e utilizar o projeto sem encontrar erros de po
 
 Você pode testar o projeto acessando o link abaixo:
 
-[Link para Testar o Sistema](https://eliassantos1.github.io/Projeto-Desenvolvimento-de-sistemas/)
+[Link para Testar o Sistema](https://eliassantos1.github.io/TCC-Engenharia-da-computacao/)
