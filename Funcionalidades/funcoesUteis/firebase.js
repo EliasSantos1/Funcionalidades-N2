@@ -262,3 +262,21 @@ export function adicionarListenerEstoque(callback) {
       }
   });
 }
+
+export function adicionarAoHistoricoEstoque(dadosParaAdicionar, ID_Dados) {
+  try {
+    // Referência para o local onde você deseja adicionar os dados
+    const dadosRef = ref(db, `HistoricoEstoque/${ID_Dados}`);
+
+    // Adicione os dados ao banco de dados
+    push(dadosRef, dadosParaAdicionar)
+      .then(() => {
+        console.log("Dados adicionados com sucesso!");
+      })
+      .catch((error) => {
+        console.error("Erro ao adicionar dados:", error);
+      });
+  } catch (error) {
+    console.error("Erro ao adicionar dados:", error);
+  }
+}

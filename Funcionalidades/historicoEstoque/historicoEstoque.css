@@ -1,0 +1,77 @@
+/* Reset de estilos */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Estilos gerais */
+body {
+    font-family: sans-serif;
+    font-size: 16px;
+    color: #333;
+    background-color: #fff;
+}
+
+/* Header */
+header {
+    background-color: #444;
+    color: #fff;
+    padding: 10px;
+    text-align: center;
+}
+
+#botaoVoltar {
+    position: absolute;
+    left: 10px;
+    color: #fff;
+    font-size: 24px;
+    cursor: pointer;
+}
+
+h1 {
+    font-size: 24px;
+    margin: 0;
+}
+
+/* Main */
+main {
+    padding: 20px;
+}
+
+/* Histórico */
+.historico {
+    max-width: 800px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+/* Estilo de cada registro */
+.pedido {
+    background-color: #f5f5f5;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 15px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: all 0.2s ease-in-out;
+}
+
+/* Quando passar o mouse sobre o registro */
+.pedido:hover {
+    transform: scale(1.02);
+    background-color: #ddd;
+    border-color: #444;
+}
+
+/* Estilo da data e descrição */
+.data {
+    font-weight: bold;
+    color: #444;
+}
+
+.descricao {
+    margin-top: 5px;
+    font-size: 18px;
+}

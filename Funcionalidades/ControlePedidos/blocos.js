@@ -4,6 +4,9 @@ const agora = new Date();
 const minutosFormatados = agora.getMinutes().toString().padStart(2, '0');
 const dataFormatada = `${agora.getDate()}/${agora.getMonth() + 1}/${agora.getFullYear()} - ${agora.getHours()}:${minutosFormatados}`;
     
+// Recupera os dados do usuário logado do sessionStorage
+const usuarioLogado = JSON.parse(sessionStorage.getItem("usuarioLogado")); // Nomeie "usuarioLogado" conforme o que você está usando para armazenar
+
 
 // Função para criar o bloco da solicitação
  export function criarBlocoSolicitacao(objeto) {
@@ -60,7 +63,7 @@ const dataFormatada = `${agora.getDate()}/${agora.getMonth() + 1}/${agora.getFul
             objeto.SC = scInput.value
             console.log(objeto);
             adicionarDadosAguardando(objeto, objeto.CHAMADO)
-		    adicionarAoHistorico(`${dataFormatada} | Feito a solicitação de compra no Tasy do chamado ${objeto.CHAMADO}`, objeto.CHAMADO)
+		    adicionarAoHistorico(`${dataFormatada} | ${usuarioLogado.nome} Fez a solicitação de compra no Tasy do chamado ${objeto.CHAMADO}`, objeto.CHAMADO)
             excluirDadosSolicitar(objeto.CHAMADO)
             location.reload()
         } else {
@@ -76,7 +79,7 @@ const dataFormatada = `${agora.getDate()}/${agora.getMonth() + 1}/${agora.getFul
         const confirmacao = window.confirm('Tem certeza que deseja excluir esse item?');
         if (confirmacao) {
             excluirDadosSolicitar(objeto.CHAMADO)
-            adicionarAoHistorico(`${dataFormatada} | Excluido pedido que ainda não tinha sido solicitado no Tasy do chamado ${objeto.CHAMADO}`, objeto.CHAMADO)
+            adicionarAoHistorico(`${dataFormatada} | ${usuarioLogado.nome} Excluiu o pedido que ainda não tinha sido solicitado no Tasy do chamado ${objeto.CHAMADO}`, objeto.CHAMADO)
             location.reload()
         } else {
             console.log('Operação cancelada.');
@@ -130,7 +133,7 @@ export function criarBlocoAguardando(objeto) {
     btnAdicionarSC.setAttribute('id', objeto.CHAMADO);
     btnAdicionarSC.addEventListener("click", function() {
         adicionarDadosRecebido(objeto, objeto.CHAMADO)
-        adicionarAoHistorico(`${dataFormatada} | Marcado como recebido os itens do chamado ${objeto.CHAMADO}`, objeto.CHAMADO)
+        adicionarAoHistorico(`${dataFormatada} | ${usuarioLogado.nome} Marcou como recebido os itens do chamado ${objeto.CHAMADO}`, objeto.CHAMADO)
         excluirDadosAguardando(objeto.CHAMADO)
         location.reload()
     })
@@ -142,7 +145,7 @@ export function criarBlocoAguardando(objeto) {
         const confirmacao = window.confirm('Tem certeza que deseja excluir esse item?');
         if (confirmacao) {
             excluirDadosAguardando(objeto.CHAMADO)
-            adicionarAoHistorico(`${dataFormatada} | Excluido pedido que ja foi solicitado no Tasy do chamado ${objeto.CHAMADO}`, objeto.CHAMADO)
+            adicionarAoHistorico(`${dataFormatada} | ${usuarioLogado.nome} Excluiu o pedido que ja foi solicitado no Tasy do chamado ${objeto.CHAMADO}`, objeto.CHAMADO)
             location.reload()
         } else {
             console.log('Operação cancelada.');
@@ -199,7 +202,7 @@ export function criarBlocoRecebido(objeto) {
         const confirmacao = window.confirm('Tem certeza que deseja excluir esse item?');
         if (confirmacao) {
             excluirDadosRecebido(objeto.CHAMADO)
-            adicionarAoHistorico(`${dataFormatada} | Excluido pedido que ja foi entregue do chamado ${objeto.CHAMADO}`, objeto.CHAMADO)
+            adicionarAoHistorico(`${dataFormatada} | ${usuarioLogado.nome} Excluiu o pedido que ja foi entregue do chamado ${objeto.CHAMADO}`, objeto.CHAMADO)
             location.reload()
         } else {
             console.log('Operação cancelada.');

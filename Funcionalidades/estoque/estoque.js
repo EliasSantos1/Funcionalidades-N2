@@ -1,4 +1,4 @@
-import { lerDados, atualizarEstoque,adicionarListenerEstoque } from "../funcoesUteis/firebase.js"; // Supondo que a função de leitura está aqui
+import { lerDados, atualizarEstoque,adicionarListenerEstoque, adicionarAoHistoricoEstoque } from "../funcoesUteis/firebase.js"; // Supondo que a função de leitura está aqui
 import { verificarLogin } from '../funcoesUteis/auth.js';
 
 // Verifica se o usuário está logado ao carregar a página
@@ -60,6 +60,27 @@ function retirarEstoque() {
         const novaQuantidade = dadosEstoque[item] - quantidade; // `dadosEstoque` contém o valor atual do item
         if (novaQuantidade >= 0) {
             atualizarEstoque(item, novaQuantidade); // Atualiza o item correto
+
+            // Adiciona ao histórico
+            const agora = new Date();
+            const minutosFormatados = agora.getMinutes().toString().padStart(2, "0");
+            const dataFormatada = `${agora.getDate()}/${
+                agora.getMonth() + 1
+            }/${agora.getFullYear()} - ${agora.getHours()}:${minutosFormatados}`;
+            const usuarioLogado = JSON.parse(sessionStorage.getItem("usuarioLogado"));
+
+            const dadosParaHistorico = {
+                acao: "Retirada",
+                item: item,
+                quantidade: quantidade,
+                usuario: usuarioLogado.nome,
+                data: dataFormatada,
+                motivo: document.getElementById("motivoRetirada").value, // Campo de motivo no modal
+                chamado: document.getElementById("chamadoRetirada").value, // Campo de chamado no modal
+            };
+
+            adicionarAoHistoricoEstoque(dadosParaHistorico, item);
+            alert("Estoque atualizado e histórico registrado.");
         } else {
             alert("Quantidade insuficiente no estoque.");
         }
@@ -78,6 +99,26 @@ function adicionarEstoque() {
     if (quantidade > 0) {
         const novaQuantidade = (dadosEstoque[item] || 0) + quantidade; // `dadosEstoque[item]` pode ser `undefined` para novos itens
         atualizarEstoque(item, novaQuantidade); // Atualiza o item correto
+
+        // Adiciona ao histórico
+        const agora = new Date();
+        const minutosFormatados = agora.getMinutes().toString().padStart(2, "0");
+        const dataFormatada = `${agora.getDate()}/${
+            agora.getMonth() + 1
+        }/${agora.getFullYear()} - ${agora.getHours()}:${minutosFormatados}`;
+        const usuarioLogado = JSON.parse(sessionStorage.getItem("usuarioLogado"));
+
+        const dadosParaHistorico = {
+            acao: "Adição",
+            item: item,
+            quantidade: quantidade,
+            usuario: usuarioLogado.nome,
+            data: dataFormatada,
+            motivo: document.getElementById("motivoAdicao").value, // Campo de motivo no modal
+        };
+
+        adicionarAoHistoricoEstoque(dadosParaHistorico, item);
+        alert("Estoque atualizado e histórico registrado.");
     } else {
         alert("Insira uma quantidade válida.");
     }

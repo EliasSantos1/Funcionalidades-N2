@@ -51,7 +51,10 @@ BotaoEnviar.addEventListener("click", function EnviaFormulario(event) {
 		const agora = new Date();
 		const minutosFormatados = agora.getMinutes().toString().padStart(2, '0');
 		const dataFormatada = `${agora.getDate()}/${agora.getMonth() + 1}/${agora.getFullYear()} - ${agora.getHours()}:${minutosFormatados}`;
-		adicionarAoHistorico(`${dataFormatada} | Feito o pedido do chamado ${objFormulario.CHAMADO}`, objFormulario.CHAMADO)
+		
+		const usuarioLogado = JSON.parse(sessionStorage.getItem("usuarioLogado")); // Nomeie "usuarioLogado" conforme o que você está usando para armazenar
+		
+		adicionarAoHistorico(`${dataFormatada} | ${usuarioLogado.nome} realizou o pedido do chamado ${objFormulario.CHAMADO}`, objFormulario.CHAMADO)
 
 		adicionarDadosSolicitar(objFormulario, objFormulario.CHAMADO)
 		alert("Pedido enviado!")
