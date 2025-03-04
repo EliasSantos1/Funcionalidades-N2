@@ -41,7 +41,8 @@ document.addEventListener("DOMContentLoaded", function() {
           console.log("Resultado da autenticação:", usuarioAutenticado);
   
           if (usuarioAutenticado) {
-            sessionStorage.setItem("usuarioLogado", JSON.stringify(usuarioAutenticado));
+            const { password, ...usuarioSemSenha } = usuarioAutenticado; 
+            sessionStorage.setItem("usuarioLogado", JSON.stringify(usuarioSemSenha));
             alert("Login realizado com sucesso!");
             console.log("Redirecionando para a página inicial.");
             window.location.href = "../../index.html"; // Redireciona para a página inicial
