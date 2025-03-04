@@ -2,7 +2,7 @@
 
 ## Descrição do Projeto
 
-Este projeto foi inicialmente desenvolvido para a matéria de Projeto Integrador: Desenvolvimento de Sistemas. Agora, foi aprimorado e expandido como parte do Trabalho de Conclusão de Curso (TCC) de Engenharia da Computação. O objetivo é criar um sistema eficiente e organizado para a equipe do Service Desk N2, onde atuo como estagiário. O sistema oferece diversas funcionalidades para facilitar o gerenciamento de pedidos, controle de estoque e acompanhamento das atividades do setor.
+Este projeto foi desenvolvido para otimizar e organizar as atividades da equipe do Service Desk N2, facilitando o gerenciamento de pedidos, controle de estoque e acompanhamento das operações do setor. Ele foi criado para melhorar o fluxo de trabalho e padronizar processos, tornando as tarefas mais ágeis e eficientes.
 
 ## Funcionalidades
 
