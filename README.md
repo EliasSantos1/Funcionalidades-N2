@@ -59,12 +59,12 @@ Para executar o projeto corretamente, é necessário hospedá-lo em um servidor 
 
 2. **Clone o repositório**:
     ```bash
-    git clone https://github.com/EliasSantos1/TCC-Engenharia-da-computacao.git
+    git clone https://github.com/EliasSantos1/Funcionalidades-N2.git
     ```
 
 3. **Navegue até o diretório do projeto**:
     ```bash
-    cd TCC-Engenharia-da-computacao
+    cd Funcionalidades-N2
     ```
 
 4. **Inicie o servidor local**:
@@ -83,4 +83,4 @@ Dessa forma, você poderá testar e utilizar o projeto sem encontrar erros de po
 
 Você pode testar o projeto acessando o link abaixo:
 
-[Link para Testar o Sistema](https://eliassantos1.github.io/TCC-Engenharia-da-computacao/)
+[Link para Testar o Sistema](https://eliassantos1.github.io/Funcionalidades-N2/)
