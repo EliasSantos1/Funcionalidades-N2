@@ -75,7 +75,7 @@ function retirarEstoque() {
                 quantidade: quantidade,
                 usuario: usuarioLogado.nome,
                 data: dataFormatada,
-                motivo: document.getElementById("motivoRetirada").value, // Campo de motivo no modal
+                setorUtilizado: document.getElementById("setorUtilizado").value, // Campo de motivo no modal
                 chamado: document.getElementById("chamadoRetirada").value, // Campo de chamado no modal
             };
 
