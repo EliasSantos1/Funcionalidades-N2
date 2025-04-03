@@ -8,7 +8,8 @@ import {
   remove, 
   update, 
   get, 
-  child 
+  child,
+  onDisconnect
 } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-database.js";
 import { 
   getAuth, 
