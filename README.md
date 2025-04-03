@@ -2,7 +2,7 @@
 
 ## Descrição do Projeto
 
-Este projeto foi inicialmente desenvolvido para a matéria de Projeto Integrador: Desenvolvimento de Sistemas. Agora, foi aprimorado e expandido como parte do Trabalho de Conclusão de Curso (TCC) de Engenharia da Computação. O objetivo é criar um sistema eficiente e organizado para a equipe do Service Desk N2, onde atuo como estagiário. O sistema oferece diversas funcionalidades para facilitar o gerenciamento de pedidos, controle de estoque e acompanhamento das atividades do setor.
+Este projeto foi desenvolvido para otimizar e organizar as atividades da equipe do Service Desk N2, facilitando o gerenciamento de pedidos, controle de estoque e acompanhamento das operações do setor. Ele foi criado para melhorar o fluxo de trabalho e padronizar processos, tornando as tarefas mais ágeis e eficientes.
 
 ## Funcionalidades
 
@@ -59,12 +59,12 @@ Para executar o projeto corretamente, é necessário hospedá-lo em um servidor 
 
 2. **Clone o repositório**:
     ```bash
-    git clone https://github.com/EliasSantos1/TCC-Engenharia-da-computacao.git
+    git clone https://github.com/EliasSantos1/Funcionalidades-N2.git
     ```
 
 3. **Navegue até o diretório do projeto**:
     ```bash
-    cd TCC-Engenharia-da-computacao
+    cd Funcionalidades-N2
     ```
 
 4. **Inicie o servidor local**:
@@ -83,4 +83,4 @@ Dessa forma, você poderá testar e utilizar o projeto sem encontrar erros de po
 
 Você pode testar o projeto acessando o link abaixo:
 
-[Link para Testar o Sistema](https://eliassantos1.github.io/TCC-Engenharia-da-computacao/)
+[Link para Testar o Sistema](https://eliassantos1.github.io/Funcionalidades-N2/)

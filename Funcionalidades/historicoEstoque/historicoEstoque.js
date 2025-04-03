@@ -53,7 +53,7 @@ function renderizarHistoricoEstoque(dados) {
         const descricao =
             registro.acao === "Adição"
                 ? `${registro.data} | ${registro.usuario} adicionou ${registro.quantidade} ${registro.item} ao estoque`
-                : `${registro.data} | ${registro.usuario} retirou ${registro.quantidade} ${registro.item} do estoque para o chamado ${registro.chamado || "não informado"}`;
+                : `${registro.chamado} | ${registro.data} | ${registro.usuario} retirou ${registro.quantidade} ${registro.item} do estoque para o setor ${registro.setorUtilizado} `;
 
         registroElement.innerHTML = `<span class="descricao">${descricao}</span>`;
 

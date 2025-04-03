@@ -13,8 +13,7 @@ import {
 import { 
   getAuth, 
   createUserWithEmailAndPassword, 
-  signInWithEmailAndPassword, 
-  signOut 
+  signInWithEmailAndPassword,
 } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-auth.js";
 
 
@@ -35,6 +34,7 @@ const auth = getAuth(app);
 const db = getDatabase(app);
 const dbRef = ref(db);
 
+const usersRef = ref(db, "users/online");
 
 window.addEventListener("beforeunload", () => {
   goOffline();
@@ -307,3 +307,12 @@ export function adicionarAoHistoricoEstoque(dadosParaAdicionar, ID_Dados) {
     console.error("Erro ao adicionar dados:", error);
   }
 }
+
+// Criando um identificador único para cada conexão
+const myConnection = push(usersRef); 
+
+// Definindo que o usuário está online
+set(myConnection, { online: true });
+
+// Configurando onDisconnect para remover o usuário ao sair
+onDisconnect(myConnection).remove();

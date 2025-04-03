@@ -277,12 +277,12 @@ function AdicionaTabelaDeItens(itensTabela, quantidadesItens) {
 
     const objetoItem = buscarItemPorCodigo(codigo);
 
+    const precoNumerico = parseFloat(objetoItem.preco) || 0; // Garante que NaN vire 0
+
     descricao.textContent = `${objetoItem.descricao}`;
-    valorUni.textContent = `R$ ${objetoItem.preco.toFixed(2)}`;
+    valorUni.textContent = `R$ ${precoNumerico.toFixed(2)}`;
     quantidade.textContent = `${quantidadeItem}`;
-    valorTotal.textContent = `R$ ${(objetoItem.preco * quantidadeItem).toFixed(
-      2
-    )}`;
+    valorTotal.textContent = `R$ ${(precoNumerico * quantidadeItem).toFixed(2)}`;
 
     linha.appendChild(descricao);
     linha.appendChild(valorUni);
