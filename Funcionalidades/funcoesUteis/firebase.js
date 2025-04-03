@@ -1,13 +1,22 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-app.js";
-import {
-  getDatabase,
-  ref,
-  set,
-  push,
-  onValue,
-  remove,
-  update
+import { 
+  getDatabase, 
+  ref, 
+  set, 
+  push, 
+  onValue, 
+  remove, 
+  update, 
+  get, 
+  child 
 } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-database.js";
+import { 
+  getAuth, 
+  createUserWithEmailAndPassword, 
+  signInWithEmailAndPassword, 
+  signOut 
+} from "https://www.gstatic.com/firebasejs/10.11.0/firebase-auth.js";
+
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
@@ -22,7 +31,7 @@ const firebaseConfig = {
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
-
+const auth = getAuth(app);
 const db = getDatabase(app);
 const dbRef = ref(db);
 
@@ -181,46 +190,64 @@ export function adicionarAoHistorico(dadosParaAdicionar, ID_Dados) {
 }
 
 // Função para autenticar o usuário
-export function autenticarUsuario(matricula, password) {
+export function autenticarUsuario(email, senha) {
   return new Promise((resolve, reject) => {
-      const usuariosRef = ref(db, 'Usuarios'); // Referência ao nó "Usuarios"
+    signInWithEmailAndPassword(auth, email, senha)
+      .then((userCredential) => {
+        const user = userCredential.user;
+        console.log("Usuário autenticado:", user);
 
-      onValue(usuariosRef, (snapshot) => {
-          const dados = snapshot.val();
-          if (dados) {
-              // Aqui, estamos usando Object.values para obter todos os usuários
-              const usuarios = Object.values(dados); // Converte os dados em um array
-
-              // Verifica se há um usuário correspondente
-              const usuarioEncontrado = usuarios.find(usuario => 
-                  usuario.matricula === matricula && usuario.password === password
-              );
-
-              if (usuarioEncontrado) {
-                  resolve(usuarioEncontrado); // Retorna o usuário autenticado
-              } else {
-                  resolve(null); // Retorna null se não encontrar
-              }
-          } else {
-              resolve(null); // Retorna null se não houver dados
-          }
-      }, (error) => {
-          reject(error); // Rejeita a Promise em caso de erro
+        // Buscar os dados extras no Realtime Database
+        const usuariosRef = ref(db, "Usuarios");
+        get(child(usuariosRef, user.uid)) // Buscar os dados do usuário pelo UID
+          .then((snapshot) => {
+            if (snapshot.exists()) {
+              const usuarioData = snapshot.val();
+              resolve({ uid: user.uid, email: user.email, ...usuarioData }); // Retorna os dados do usuário
+            } else {
+              console.warn("Usuário autenticado, mas sem dados extras no banco.");
+              resolve({ uid: user.uid, email: user.email });
+            }
+          })
+          .catch((error) => {
+            console.error("Erro ao buscar dados do usuário:", error);
+            reject(error);
+          });
+      })
+      .catch((error) => {
+        console.error("Erro ao fazer login:", error);
+        reject(error);
       });
   });
 }
 
-export function adicionarUsuario(dadosUsuario) {
+export function adicionarUsuario(email, senha, nome, matricula, isAdmin) {
   return new Promise((resolve, reject) => {
-    const usuariosRef = ref(db, 'Usuarios/' + dadosUsuario.matricula); // Usando a matrícula como chave
-    set(usuariosRef, dadosUsuario)
-      .then(() => {
-        console.log("Usuário adicionado com sucesso!");
-        resolve(); // Resolve a Promise
+    // Criar usuário no Firebase Authentication
+    createUserWithEmailAndPassword(auth, email, senha)
+      .then((userCredential) => {
+        const user = userCredential.user;
+
+        // Após criar o usuário, salvar os dados extras no Realtime Database
+        const usuariosRef = ref(db, 'Usuarios/' + user.uid);
+        set(usuariosRef, {
+          nome: nome,
+          matricula: matricula,
+          email: email,
+          isAdmin: isAdmin
+        })
+        .then(() => {
+          console.log("Usuário cadastrado com sucesso!");
+          resolve();
+        })
+        .catch((error) => {
+          console.error("Erro ao salvar dados no banco:", error);
+          reject(error);
+        });
       })
       .catch((error) => {
-        console.error("Erro ao adicionar usuário:", error);
-        reject(error); // Rejeita a Promise em caso de erro
+        console.error("Erro ao criar usuário:", error);
+        reject(error);
       });
   });
 }

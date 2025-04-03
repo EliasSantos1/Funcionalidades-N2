@@ -60,32 +60,36 @@ document.addEventListener("DOMContentLoaded", function() {
     });
   
     // Formulário de Registro
-    registerForm.addEventListener("submit", function(event) {
+    registerForm.addEventListener("submit", function (event) {
       event.preventDefault();
       console.log("Evento de submit do registro disparado e comportamento padrão prevenido.");
-  
+    
       const nome = document.getElementById("nome").value;
       const email = document.getElementById("email").value;
       const matricula = document.getElementById("matricula-register").value;
       const password = document.getElementById("password-register").value;
       const registerFeedback = document.getElementById("register-feedback");
       const isAdmin = false;
-  
+    
       console.log("Dados do registro:", { nome, email, matricula, password });
       registerFeedback.textContent = ""; // Limpa o feedback
-  
-      // Chama a função para adicionar o usuário ao banco
-      adicionarUsuario({ nome, email, matricula, password, isAdmin })
+    
+      // Chama a função para adicionar o usuário ao Firebase Authentication e salvar os dados extras
+      adicionarUsuario(email, password, nome, matricula, isAdmin)
         .then(() => {
           registerFeedback.textContent = "Usuário cadastrado com sucesso!";
           registerFeedback.style.color = "green";
           console.log("Usuário cadastrado com sucesso.");
+          
+          // Recarrega a página após um curto período para refletir as mudanças
+          setTimeout(() => {
+            location.reload();
+          }, 1000);
         })
         .catch((error) => {
           console.error("Erro ao cadastrar usuário:", error);
           registerFeedback.textContent = "Erro ao cadastrar. Tente novamente.";
           registerFeedback.style.color = "red";
         });
-        location.reload();
     });
   });
