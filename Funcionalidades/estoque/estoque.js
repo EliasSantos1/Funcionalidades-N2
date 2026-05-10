@@ -91,6 +91,12 @@ function retirarEstoque() {
     fecharModal("modalRetirar");
 }
 
+const agora = new Date();
+        const minutosFormatados = agora.getMinutes().toString().padStart(2, "0");
+        const dataFormatada = `${agora.getDate()}/${
+            agora.getMonth() + 1
+        }/${agora.getFullYear()} - ${agora.getHours()}:${minutosFormatados}`;
+
 function adicionarEstoque() {
     var modalAdicionar = document.getElementById("modalAdicionar");
     var item = modalAdicionar.dataset.item; // Obtém o item atribuído ao modal
@@ -101,11 +107,6 @@ function adicionarEstoque() {
         atualizarEstoque(item, novaQuantidade); // Atualiza o item correto
 
         // Adiciona ao histórico
-        const agora = new Date();
-        const minutosFormatados = agora.getMinutes().toString().padStart(2, "0");
-        const dataFormatada = `${agora.getDate()}/${
-            agora.getMonth() + 1
-        }/${agora.getFullYear()} - ${agora.getHours()}:${minutosFormatados}`;
         const usuarioLogado = JSON.parse(sessionStorage.getItem("usuarioLogado"));
 
         const dadosParaHistorico = {
@@ -189,3 +190,149 @@ document.addEventListener("DOMContentLoaded", () => {
     btnEnviarRetirar.addEventListener("click", retirarEstoque);
     btnEnviarAdicionar.addEventListener("click", adicionarEstoque);
 });
+
+let contadorItensRetirada = 0;
+
+function adicionarCampoRetirada() {
+
+    contadorItensRetirada++;
+
+    const container = document.getElementById("listaItensRetirada");
+
+    const div = document.createElement("div");
+
+    div.classList.add("item-retirada");
+
+    const select = document.createElement("select");
+    select.id = `itemRetirada-${contadorItensRetirada}`;
+
+    for (const item in dadosEstoque) {
+
+        const option = document.createElement("option");
+
+        option.value = item;
+        option.textContent = item;
+
+        select.appendChild(option);
+    }
+
+    const inputQuantidade = document.createElement("input");
+
+    inputQuantidade.type = "number";
+    inputQuantidade.min = "1";
+    inputQuantidade.value = "1";
+
+    inputQuantidade.id = `quantidadeRetirada-${contadorItensRetirada}`;
+
+    div.appendChild(select);
+    div.appendChild(inputQuantidade);
+
+    container.appendChild(div);
+}
+
+function abrirModalRetirarVarios() {
+
+    document.getElementById("modalRetirarVarios").style.display = "flex";
+
+    const container = document.getElementById("listaItensRetirada");
+
+    container.innerHTML = "";
+
+    contadorItensRetirada = 0;
+
+    adicionarCampoRetirada();
+}
+
+async function retirarVariosItens() {
+
+    const chamado = document.getElementById("chamadoRetiradaVarios").value;
+
+    const setor = document.getElementById("setorRetiradaVarios").value;
+
+    const usuarioLogado = JSON.parse(
+        sessionStorage.getItem("usuarioLogado")
+    );
+
+    for (let i = 1; i <= contadorItensRetirada; i++) {
+
+        const item = document.getElementById(`itemRetirada-${i}`).value;
+
+        const quantidade = parseInt(
+            document.getElementById(`quantidadeRetirada-${i}`).value
+        );
+
+        const estoqueAtual = Number(dadosEstoque[item]) || 0;
+
+        if (quantidade > estoqueAtual) {
+
+            alert(`Estoque insuficiente para ${item}`);
+
+            return;
+        }
+    }
+
+    for (let i = 1; i <= contadorItensRetirada; i++) {
+
+        const item = document.getElementById(`itemRetirada-${i}`).value;
+
+        const quantidade = parseInt(
+            document.getElementById(`quantidadeRetirada-${i}`).value
+        );
+
+        const estoqueAtual = Number(dadosEstoque[item]) || 0;
+
+        const novaQuantidade = estoqueAtual - quantidade;
+
+        atualizarEstoque(item, novaQuantidade);
+
+        const agora = new Date();
+
+        const dadosHistorico = {
+
+            acao: "Retirada",
+            item: item,
+            quantidade: quantidade,
+            usuario: usuarioLogado.nome,
+            chamado: chamado,
+            setorUtilizado: setor,
+            data: dataFormatada,
+        };
+
+        adicionarAoHistoricoEstoque(
+            dadosHistorico,
+            item
+        );
+    }
+
+    alert("Itens retirados com sucesso");
+
+    fecharModal("modalRetirarVarios");
+}
+
+document
+    .getElementById("btnRetirarVarios")
+    .addEventListener(
+        "click",
+        abrirModalRetirarVarios
+    );
+
+document
+    .getElementById("btnAdicionarItemRetirada")
+    .addEventListener(
+        "click",
+        adicionarCampoRetirada
+    );
+
+document
+    .getElementById("btnEnviarRetiradaVarios")
+    .addEventListener(
+        "click",
+        retirarVariosItens
+    );
+
+document
+    .getElementById("closeModalRetirarVarios")
+    .addEventListener(
+        "click",
+        () => fecharModal("modalRetirarVarios")
+    );

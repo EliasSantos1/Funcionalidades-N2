@@ -13,6 +13,9 @@
             <i id="botaoVoltar" class="fas fa-arrow-left"></i>
           </a>
         <h1>Controle de Estoque</h1>
+        <button id="btnRetirarVarios">
+            Retirar vários itens
+        </button>
     </header>
     <div id="containers_geral">
         <div class="container">
@@ -61,6 +64,30 @@
             <label for="quantidadeAdicionada">Quantidade:</label>
             <input type="number" id="quantidadeAdicionada" min="1"><br>
             <button class="modal-button" id="btnAdicionarEstoque">Enviar</button>
+        </div>
+    </div>
+
+    <div id="modalRetirarVarios" class="modal">
+        <div class="modal-content">
+            <span class="close" id="closeModalRetirarVarios">&times;</span>
+    
+            <h2>Retirar Vários Itens</h2>
+    
+            <label>Chamado:</label>
+            <input type="text" id="chamadoRetiradaVarios">
+    
+            <label>Setor:</label>
+            <input type="text" id="setorRetiradaVarios">
+    
+            <div id="listaItensRetirada"></div>
+    
+            <button id="btnAdicionarItemRetirada">
+                Adicionar outro item
+            </button>
+    
+            <button class="modal-button" id="btnEnviarRetiradaVarios">
+                Enviar
+            </button>
         </div>
     </div>
 
