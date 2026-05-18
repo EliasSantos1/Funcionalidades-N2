@@ -1,4 +1,4 @@
-import { adicionarDadosAguardando, adicionarDadosRecebido, excluirDadosAguardando, excluirDadosRecebido, excluirDadosSolicitar, adicionarAoHistorico } from "../funcoesUteis/firebase.js";
+import { adicionarDadosSolicitar, adicionarDadosAguardando, adicionarDadosRecebido, excluirDadosAguardando, excluirDadosRecebido, excluirDadosSolicitar, adicionarAoHistorico } from "../funcoesUteis/firebase.js";
 
 const agora = new Date();
 const minutosFormatados = agora.getMinutes().toString().padStart(2, '0');
@@ -119,7 +119,7 @@ const usuarioLogado = JSON.parse(sessionStorage.getItem("usuarioLogado")); // No
                     )
                 }
             
-                adicionarDadosAguardando(objeto, objeto.CHAMADO);
+                adicionarDadosSolicitar(objeto, objeto.CHAMADO);
             
             });
         
@@ -398,7 +398,7 @@ export function criarBlocoRecebido(objeto) {
                     )
                 }
             
-                adicionarDadosAguardando(objeto, objeto.CHAMADO);
+                adicionarDadosRecebido(objeto, objeto.CHAMADO);
             
             });
         
