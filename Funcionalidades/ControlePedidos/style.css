@@ -61,10 +61,30 @@ p {
     margin-bottom: 3px;
 }
 
-input {
-    width: 60%;
+input[type="text"] {
+  width: 60%;
 }
 
 .script {
     margin-bottom: 10px;
+}
+
+.script.adiantado {
+  background-color: #dff5e1;
+}
+
+.seloAdiantado {
+  background-color: #28a745;
+  color: white;
+  padding: 6px 10px;
+  border-radius: 6px;
+  font-size: 12px;
+  font-weight: bold;
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+.checkAdiantado {
+  margin-top: 8px;
+  margin-bottom: 8px;
 }

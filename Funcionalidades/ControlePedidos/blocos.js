@@ -54,6 +54,76 @@ const usuarioLogado = JSON.parse(sessionStorage.getItem("usuarioLogado")); // No
     divContainer.appendChild(qtd);
     }
 
+            // CHECKBOX ADIANTADO
+            const divCheck = document.createElement('div');
+            divCheck.classList.add('checkAdiantado');
+        
+            const checkbox = document.createElement('input');
+            checkbox.type = 'checkbox';
+            checkbox.checked = objeto.ADIANTADO || false;
+        
+            const label = document.createElement('label');
+            label.innerHTML = ' Item adiantado do estoque';
+        
+            divCheck.appendChild(checkbox);
+            divCheck.appendChild(label);
+        
+            divContainer.appendChild(divCheck);
+        
+            const selo = document.createElement('div');
+            selo.classList.add('seloAdiantado');
+            selo.innerHTML = '✅ ADIANTADO DO ESTOQUE';
+            
+            if(objeto.ADIANTADO){
+                divContainer.classList.add('adiantado');
+                divContainer.prepend(selo);
+            }
+        
+            checkbox.addEventListener('change', function(){
+        
+                const confirmar = checkbox.checked
+                    ? window.confirm('Deseja marcar este item como adiantado?')
+                    : window.confirm('Deseja remover o status de adiantado?');
+            
+                if(!confirmar){
+                    checkbox.checked = !checkbox.checked;
+                    return;
+                }
+            
+                objeto.ADIANTADO = checkbox.checked;
+            
+                if(checkbox.checked){
+            
+                    divContainer.classList.add('adiantado');
+            
+                    if(!divContainer.contains(selo)){
+                        divContainer.prepend(selo);
+                    }
+            
+                    adicionarAoHistorico(
+                        `${dataFormatada} | ${usuarioLogado.nome} Marcou o pedido do chamado ${objeto.CHAMADO} como adiantado`,
+                        objeto.CHAMADO
+                    )
+            
+                } else {
+            
+                    divContainer.classList.remove('adiantado');
+            
+                    if(divContainer.contains(selo)){
+                        divContainer.removeChild(selo);
+                    }
+            
+                    adicionarAoHistorico(
+                        `${dataFormatada} | ${usuarioLogado.nome} Removeu o status de adiantado do pedido do chamado ${objeto.CHAMADO}`,
+                        objeto.CHAMADO
+                    )
+                }
+            
+                adicionarDadosAguardando(objeto, objeto.CHAMADO);
+            
+            });
+        
+
     const btnAdicionarSC = document.createElement('button');
     btnAdicionarSC.textContent = 'Adicionar SC';
     btnAdicionarSC.setAttribute('id', objeto.CHAMADO);
@@ -128,6 +198,75 @@ export function criarBlocoAguardando(objeto) {
     divContainer.appendChild(qtd);
     }
 
+        // CHECKBOX ADIANTADO
+    const divCheck = document.createElement('div');
+    divCheck.classList.add('checkAdiantado');
+
+    const checkbox = document.createElement('input');
+    checkbox.type = 'checkbox';
+    checkbox.checked = objeto.ADIANTADO || false;
+
+    const label = document.createElement('label');
+    label.innerHTML = ' Item adiantado do estoque';
+
+    divCheck.appendChild(checkbox);
+    divCheck.appendChild(label);
+
+    divContainer.appendChild(divCheck);
+
+    const selo = document.createElement('div');
+    selo.classList.add('seloAdiantado');
+    selo.innerHTML = '✅ ADIANTADO DO ESTOQUE';
+    
+    if(objeto.ADIANTADO){
+        divContainer.classList.add('adiantado');
+        divContainer.prepend(selo);
+    }
+
+    checkbox.addEventListener('change', function(){
+
+        const confirmar = checkbox.checked
+            ? window.confirm('Deseja marcar este item como adiantado?')
+            : window.confirm('Deseja remover o status de adiantado?');
+    
+        if(!confirmar){
+            checkbox.checked = !checkbox.checked;
+            return;
+        }
+    
+        objeto.ADIANTADO = checkbox.checked;
+    
+        if(checkbox.checked){
+    
+            divContainer.classList.add('adiantado');
+    
+            if(!divContainer.contains(selo)){
+                divContainer.prepend(selo);
+            }
+    
+            adicionarAoHistorico(
+                `${dataFormatada} | ${usuarioLogado.nome} Marcou o pedido do chamado ${objeto.CHAMADO} como adiantado`,
+                objeto.CHAMADO
+            )
+    
+        } else {
+    
+            divContainer.classList.remove('adiantado');
+    
+            if(divContainer.contains(selo)){
+                divContainer.removeChild(selo);
+            }
+    
+            adicionarAoHistorico(
+                `${dataFormatada} | ${usuarioLogado.nome} Removeu o status de adiantado do pedido do chamado ${objeto.CHAMADO}`,
+                objeto.CHAMADO
+            )
+        }
+    
+        adicionarDadosAguardando(objeto, objeto.CHAMADO);
+    
+    });
+
     const btnAdicionarSC = document.createElement('button');
     btnAdicionarSC.textContent = 'Item Recebido';
     btnAdicionarSC.setAttribute('id', objeto.CHAMADO);
@@ -193,6 +332,76 @@ export function criarBlocoRecebido(objeto) {
     qtd.innerHTML = `<b>QTD: </b>${objItem.quantidade}`;
     divContainer.appendChild(qtd);
     }
+
+            // CHECKBOX ADIANTADO
+            const divCheck = document.createElement('div');
+            divCheck.classList.add('checkAdiantado');
+        
+            const checkbox = document.createElement('input');
+            checkbox.type = 'checkbox';
+            checkbox.checked = objeto.ADIANTADO || false;
+        
+            const label = document.createElement('label');
+            label.innerHTML = ' Item entregue';
+        
+            divCheck.appendChild(checkbox);
+            divCheck.appendChild(label);
+        
+            divContainer.appendChild(divCheck);
+        
+            const selo = document.createElement('div');
+            selo.classList.add('seloAdiantado');
+            selo.innerHTML = '✅ ENTREGUE';
+            
+            if(objeto.ADIANTADO){
+                divContainer.classList.add('adiantado');
+                divContainer.prepend(selo);
+            }
+        
+            checkbox.addEventListener('change', function(){
+        
+                const confirmar = checkbox.checked
+                    ? window.confirm('Deseja marcar este item como entregue?')
+                    : window.confirm('Deseja remover o status de entregue?');
+            
+                if(!confirmar){
+                    checkbox.checked = !checkbox.checked;
+                    return;
+                }
+            
+                objeto.ADIANTADO = checkbox.checked;
+            
+                if(checkbox.checked){
+            
+                    divContainer.classList.add('adiantado');
+            
+                    if(!divContainer.contains(selo)){
+                        divContainer.prepend(selo);
+                    }
+            
+                    adicionarAoHistorico(
+                        `${dataFormatada} | ${usuarioLogado.nome} Marcou o pedido do chamado ${objeto.CHAMADO} como entregue`,
+                        objeto.CHAMADO
+                    )
+            
+                } else {
+            
+                    divContainer.classList.remove('adiantado');
+            
+                    if(divContainer.contains(selo)){
+                        divContainer.removeChild(selo);
+                    }
+            
+                    adicionarAoHistorico(
+                        `${dataFormatada} | ${usuarioLogado.nome} Removeu o status de entregue do pedido do chamado ${objeto.CHAMADO}`,
+                        objeto.CHAMADO
+                    )
+                }
+            
+                adicionarDadosAguardando(objeto, objeto.CHAMADO);
+            
+            });
+        
 
     const btnExcluir = document.createElement('button');
     btnExcluir.textContent = 'Excluir';
