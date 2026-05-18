@@ -1,10 +1,12 @@
-import { lerDados, atualizarEstoque,adicionarListenerEstoque, adicionarAoHistoricoEstoque } from "../funcoesUteis/firebase.js"; // Supondo que a função de leitura está aqui
+import { lerDados, atualizarEstoque, adicionarListenerEstoque, adicionarAoHistoricoEstoque } from "../funcoesUteis/firebase.js"; // Supondo que a função de leitura está aqui
 import { verificarLogin } from '../funcoesUteis/auth.js';
 
 // Verifica se o usuário está logado ao carregar a página
 verificarLogin();
 
 var dadosEstoque = null;
+
+carregarSetores();
 
 lerDados()
     .then((dados) => {
@@ -21,10 +23,10 @@ lerDados()
         console.error("Erro ao carregar dados do estoque:", error);
     });
 
-    adicionarListenerEstoque((dadosAtualizados) => {
-        dadosEstoque = dadosAtualizados; // Atualiza a variável local
-        exibirItensEstoque(dadosEstoque); // Atualiza os itens na tela
-    });
+adicionarListenerEstoque((dadosAtualizados) => {
+    dadosEstoque = dadosAtualizados; // Atualiza a variável local
+    exibirItensEstoque(dadosEstoque); // Atualiza os itens na tela
+});
 
 // Função para abrir o modal de Retirar
 export function abrirTelaRetirar(item) {
@@ -64,9 +66,8 @@ function retirarEstoque() {
             // Adiciona ao histórico
             const agora = new Date();
             const minutosFormatados = agora.getMinutes().toString().padStart(2, "0");
-            const dataFormatada = `${agora.getDate()}/${
-                agora.getMonth() + 1
-            }/${agora.getFullYear()} - ${agora.getHours()}:${minutosFormatados}`;
+            const dataFormatada = `${agora.getDate()}/${agora.getMonth() + 1
+                }/${agora.getFullYear()} - ${agora.getHours()}:${minutosFormatados}`;
             const usuarioLogado = JSON.parse(sessionStorage.getItem("usuarioLogado"));
 
             const dadosParaHistorico = {
@@ -92,10 +93,9 @@ function retirarEstoque() {
 }
 
 const agora = new Date();
-        const minutosFormatados = agora.getMinutes().toString().padStart(2, "0");
-        const dataFormatada = `${agora.getDate()}/${
-            agora.getMonth() + 1
-        }/${agora.getFullYear()} - ${agora.getHours()}:${minutosFormatados}`;
+const minutosFormatados = agora.getMinutes().toString().padStart(2, "0");
+const dataFormatada = `${agora.getDate()}/${agora.getMonth() + 1
+    }/${agora.getFullYear()} - ${agora.getHours()}:${minutosFormatados}`;
 
 function adicionarEstoque() {
     var modalAdicionar = document.getElementById("modalAdicionar");
@@ -249,6 +249,21 @@ async function retirarVariosItens() {
 
     const setor = document.getElementById("setorRetiradaVarios").value;
 
+    const options = document.querySelectorAll("#listaSetoresVarios option");
+
+    let valido = false;
+
+    options.forEach(opt => {
+        if (opt.value === setor) {
+            valido = true;
+        }
+    });
+
+    if (!setor || !valido) {
+        alert("Selecione um setor válido.");
+        return;
+    }
+
     const usuarioLogado = JSON.parse(
         sessionStorage.getItem("usuarioLogado")
     );
@@ -336,3 +351,54 @@ document
         "click",
         () => fecharModal("modalRetirarVarios")
     );
+
+function carregarSetores() {
+
+    lerDados().then((dados) => {
+
+        const centroDeCusto = dados.CentroDeCusto;
+
+        const datalist1 = document.getElementById("listaSetores");
+        const datalist2 = document.getElementById("listaSetoresVarios");
+
+        datalist1.innerHTML = "";
+        datalist2.innerHTML = "";
+
+        for (const chave in centroDeCusto) {
+
+            const setor = centroDeCusto[chave].Setor;
+
+            const option1 = document.createElement("option");
+            option1.value = setor;
+
+            const option2 = document.createElement("option");
+            option2.value = setor;
+
+            datalist1.appendChild(option1);
+            datalist2.appendChild(option2);
+        }
+
+    }).catch((erro) => {
+        console.error("Erro ao carregar setores:", erro);
+    });
+}
+
+document.getElementById("setorUtilizado").addEventListener("blur", function () {
+
+    const input = this.value;
+
+    const options = document.querySelectorAll("#listaSetores option");
+
+    let valido = false;
+
+    options.forEach(option => {
+        if (option.value === input) {
+            valido = true;
+        }
+    });
+
+    if (!valido) {
+        alert("Selecione um setor válido da lista.");
+        this.value = "";
+    }
+});
