@@ -199,7 +199,7 @@ function AdicionaTextoNaDiv(
           <td>${setor}</td>
         </tr>
         <tr>
-          <td>PATRIMONIO</td>
+          <td>PATRIMÔNIO</td>
           <td>${patrimonio}</td>
         </tr>
         <tr>
@@ -221,13 +221,13 @@ function AdicionaTextoNaDiv(
   var texto2 = `
       <br>
       <p class="destaque">
-        Obs: Todas as solicitações possuem 7 dias para que sejam aprovados, do contrário, o chamado é cancelado.
+        Obs: Todas as solicitações possuem 7 dias para serem aprovadas, do contrário, o chamado é cancelado.
       </p>
       <p class="destaque">
         Pedimos o seu apoio para que possamos dar início a tratativa do chamado.
       </p>
       <p>
-        Qualquer dúvida estou a sua disposição.
+        Qualquer dúvida estou à sua disposição.
       </p>
       `;
 
